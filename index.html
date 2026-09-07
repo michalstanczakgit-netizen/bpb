@@ -147,12 +147,13 @@
       <h1>解体儀式 · PODRĘCZNIK SAPERA</h1>
       <sub>INSTRUKCJA ROZBRAJANIA — PROTOKÓŁ UKIYO-E</sub>
     </div>
-    <div class="badge">9 MODUŁÓW · 3 BŁĘDY · 6:00 MIN</div>
+    <div class="badge">9 MODUŁÓW · 3 BŁĘDY · 06:00 MIN</div>
   </div>
 
   <div class="intro-box">
-    Bomba generuje losowy <strong>numer seryjny (SN)</strong> oraz od 3 do 9 modułów do rozbrojenia jednocześnie.
-    Masz <strong>6 minut</strong> i maksymalnie <strong>3 błędy</strong> (błędne działanie w dowolnym module dolicza
+    Bomba generuje losowy <strong>numer seryjny (SN)</strong> oraz zawsze dokładnie <strong>9 modułów</strong>
+    do rozbrojenia jednocześnie (tylko liczba przewodów w Module 1 losuje się od 3 do 6 — to nie zmienia
+    liczby modułów). Masz <strong>6 minut</strong> i maksymalnie <strong>3 błędy</strong> (błędne działanie w dowolnym module dolicza
     jeden błąd — przy trzecim następuje detonacja). Część modułów jest w pełni losowa, a część
     <strong>zależy od innych modułów lub od numeru seryjnego</strong> — dokładnie to opisuje ten podręcznik,
     moduł po module, w kolejności, w jakiej trzeba je rozpracować.
@@ -275,17 +276,20 @@
     <div class="module-card" id="m4">
       <div class="module-head"><span>4. Maski Kitsune</span><span class="dep-tag">ZALEŻY OD MODUŁU 3</span></div>
       <div class="module-body">
-        <p>Na siatce 2×2 widoczne są 4 maski. Poprawną maskę wskazuje wyłącznie jej <b>pozycja w siatce</b>,
-        nie jej wygląd (maski są losowe i tasowane za każdą grą).</p>
+        <p>Na siatce 2×2 widoczne są zawsze <b>4 maski</b> (wylosowane i potasowane z puli 5 możliwych — ich
+        wygląd zmienia się co grę). Poprawną maskę wskazuje wyłącznie jej <b>pozycja w siatce</b>, nie jej
+        wygląd.</p>
         <div class="rule-box">
           <h4>Jak wyliczyć pozycję</h4>
-          <p style="margin:0;">Policz, ile glifów było widocznych w Module 3 (Glify Kanji), i weź tę liczbę
-          <b>modulo 4</b>. Wynik wskazuje pozycję w siatce, licząc od <b>0</b>:</p>
+          <p style="margin:0 0 8px;">Policz, ile glifów było widocznych w Module 3 (Glify Kanji) — będzie ich
+          od 4 do 7 — i weź tę liczbę <b>modulo 4</b>. Wynik wskazuje pozycję w siatce 2×2, licząc od <b>0</b>:</p>
+          <table class="manual-table" style="margin:0 0 8px;">
+            <tr><th>Wynik (mod 4)</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+            <tr><td>Pozycja w siatce 2×2</td><td>góra-lewo</td><td>góra-prawo</td><td>dół-lewo</td><td>dół-prawo</td></tr>
+          </table>
+          <p style="margin:0;"><b>Przykład:</b> w Module 3 widocznych było 6 glifów → 6 mod 4 = <b>2</b> →
+          kliknij maskę w pozycji <b>dół-lewo</b>.</p>
         </div>
-        <table class="manual-table">
-          <tr><th>Wynik (mod 4)</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
-          <tr><td>Pozycja w siatce 2×2</td><td>góra-lewo</td><td>góra-prawo</td><td>dół-lewo</td><td>dół-prawo</td></tr>
-        </table>
       </div>
     </div>
 
@@ -332,8 +336,10 @@
     <div class="module-card" id="m6">
       <div class="module-head"><span>6. Zodiak Kanbatsu</span><span class="dep-tag">ZALEŻY OD MODUŁÓW 1 i 2</span></div>
       <div class="module-body">
-        <p>Rozwijana lista pokazuje 5 losowo dobranych i potasowanych znaków zodiaku. Trzeba wybrać
-        z niej właściwą pozycję (licząc od góry, od <b>0</b>).</p>
+        <p>Rozwijana lista pokazuje 5 losowo dobranych i potasowanych znaków zodiaku, a na samej górze listy
+        znajduje się dodatkowo opcja „Wybierz Zodiak...", która <b>nie jest</b> jednym z 5 znaków — pomiń ją
+        przy liczeniu pozycji. Trzeba wybrać właściwy znak, licząc rzeczywiste pozycje zodiaków od <b>0</b>
+        (pierwszy znak pod placeholderem = pozycja 0, drugi = pozycja 1, itd.).</p>
         <div class="rule-box">
           <h4>Jak wyliczyć pozycję</h4>
           <p style="margin:0 0 8px;">Każdy kolor pieczęci z Modułu 2 ma stały numer:</p>
@@ -342,7 +348,10 @@
             <tr><td>Numer</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
           </table>
           <p style="margin:8px 0 0;">Dodaj do tego numeru <b>liczbę przewodów z Modułu 1</b>, a wynik weź
-          <b>modulo 5</b> (liczba pozycji na liście). To jest pozycja do wybrania z listy.</p>
+          <b>modulo 5</b> (lista zawsze pokazuje dokładnie 5 znaków zodiaku). Wynik to pozycja znaku
+          zodiaku do wybrania — licząc od 0, <b>bez uwzględniania opcji „Wybierz Zodiak..."</b>.</p>
+          <p style="margin:8px 0 0;"><b>Przykład:</b> Pieczęć Złota (numer 2) + 4 przewody w Module 1 →
+          (2 + 4) mod 5 = <b>0</b> → wybierz pierwszy znak zodiaku na liście (zaraz pod placeholderem).</p>
         </div>
       </div>
     </div>
