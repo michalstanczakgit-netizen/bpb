@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>PODRĘCZNIK SAPERA — Protokół Ukiyo-e</title>
+<title>PROTOKÓŁ UKIYO-E — Podręcznik Sapera</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Noto+Serif+JP:wght@400;600;700;900&family=Yuji+Syuku&display=swap" rel="stylesheet">
 <style>
@@ -19,6 +19,7 @@
     --gold: #c29b38;
     --gold-light: #e5c365;
     --sumi-border: #2a2420;
+    --green-ok: #2b8c53;
     --font-jp: 'Noto Serif JP', serif;
     --font-brush: 'Yuji Syuku', serif;
     --font-title: 'Cinzel Decorative', cursive;
@@ -30,7 +31,7 @@
   body {
     display: flex; flex-direction: column; align-items: center;
     background-image: radial-gradient(circle at 50% 20%, #173854 0%, #080d12 80%);
-    position: relative; overflow-x: hidden; padding: 20px 20px 60px;
+    position: relative; overflow-x: hidden; padding: 20px;
   }
 
   .wave-bg {
@@ -40,68 +41,99 @@
   }
 
   .scroll-container {
-    position: relative; z-index: 2; width: 100%; max-width: 900px;
+    position: relative; z-index: 2; width: 100%; max-width: 980px;
     background: var(--washi-bg); border: 12px solid var(--prussian-blue);
     border-radius: 4px; box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 40px rgba(188,58,43,0.15);
-    padding: 28px; background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 4px);
+    padding: 24px; margin-bottom: 40px;
+    background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 4px);
   }
 
-  .doc-header { text-align: center; border-bottom: 3px double var(--vermilion); padding-bottom: 18px; margin-bottom: 24px; }
-  .doc-header h1 { font-family: var(--font-brush); margin: 0; font-size: 32px; color: var(--prussian-blue); letter-spacing: 2px; }
-  .doc-header sub { display:block; font-family: var(--font-jp); font-size: 12px; color: var(--vermilion); letter-spacing: 3px; font-weight: 700; margin-top: 6px; }
-  .doc-header p { font-size: 13px; margin: 10px 0 0; color: var(--ink-black); }
-
-  .toc { background: var(--washi-card); border: 1px solid var(--sumi-border); border-radius: 4px; padding: 12px 18px; margin-bottom: 24px; }
-  .toc h2 { font-family: var(--font-brush); font-size: 16px; color: var(--prussian-blue); margin: 0 0 8px; }
-  .toc ol { margin: 0; padding-left: 20px; font-size: 13px; columns: 2; column-gap: 24px; }
-  .toc a { color: var(--ink-black); text-decoration: none; }
-  .toc a:hover { color: var(--vermilion); text-decoration: underline; }
+  .header-bar {
+    display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 15px;
+    border-bottom: 3px double var(--vermilion); padding-bottom: 16px; margin-bottom: 24px;
+  }
+  .title-group h1 { font-family: var(--font-brush); margin: 0; font-size: 28px; color: var(--prussian-blue); letter-spacing: 2px; }
+  .title-group sub { font-family: var(--font-jp); font-size: 11px; color: var(--vermilion); letter-spacing: 3px; font-weight: 700; display:block; margin-top:4px; }
+  .badge { background: var(--prussian-blue); color: var(--gold-light); padding: 6px 12px; border: 2px solid var(--gold); border-radius: 4px; font-family: monospace; font-size: 13px; font-weight: bold; letter-spacing: 1px; }
 
   .intro-box {
-    background: var(--washi-card); border: 2px solid var(--sumi-border); border-radius: 4px;
-    padding: 14px 18px; margin-bottom: 24px; box-shadow: 3px 3px 0px rgba(0,0,0,0.15);
+    background: rgba(11,37,58,0.06); border: 1px solid var(--gold); border-radius: 4px;
+    padding: 14px 18px; margin-bottom: 22px; font-size: 14px; line-height: 1.6;
   }
-  .intro-box h2 { font-family: var(--font-brush); color: var(--prussian-blue); margin: 0 0 10px; font-size: 19px; border-bottom: 2px solid var(--vermilion); padding-bottom: 6px; }
-  .intro-box ul { margin: 8px 0; padding-left: 20px; font-size: 13.5px; line-height: 1.6; }
-  .intro-box li { margin-bottom: 4px; }
+  .intro-box strong { color: var(--vermilion); }
 
-  .module-section {
-    border: 2px solid var(--sumi-border); border-radius: 4px; padding: 16px 20px; margin-bottom: 18px;
-    background: var(--washi-card); box-shadow: 3px 3px 0px rgba(0,0,0,0.12); scroll-margin-top: 20px;
+  .sn-diagram { display: flex; justify-content: center; gap: 6px; margin: 16px 0; flex-wrap: wrap; }
+  .sn-cell { display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .sn-char { width: 46px; height: 46px; display:flex; align-items:center; justify-content:center;
+    background: var(--prussian-blue); color: var(--gold-light); font-family: var(--font-brush); font-size: 22px;
+    border: 2px solid var(--gold); border-radius: 4px; }
+  .sn-char.highlight-letter { background: var(--vermilion); border-color: var(--gold-light); }
+  .sn-char.highlight-digit { background: var(--green-ok); border-color: var(--gold-light); }
+  .sn-tag { font-size: 9px; font-weight: 700; text-align:center; color: var(--prussian-blue); letter-spacing: 0.5px; max-width: 60px; }
+
+  .toc { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 8px; margin-bottom: 26px; }
+  .toc a {
+    display:block; background: var(--washi-card); border: 1px solid var(--sumi-border); border-radius: 4px;
+    padding: 8px 10px; font-size: 12px; font-weight: 700; color: var(--prussian-blue); text-decoration: none;
   }
-  .module-section h2 {
-    font-family: var(--font-brush); color: var(--prussian-blue); margin: 0 0 10px 0; font-size: 20px;
-    border-bottom: 2px solid var(--vermilion); padding-bottom: 6px; display: flex; align-items: center; gap: 8px;
+  .toc a:hover { border-color: var(--vermilion); color: var(--vermilion); }
+
+  .modules-list { display: flex; flex-direction: column; gap: 20px; }
+
+  .module-card {
+    background: var(--washi-card); border: 2px solid var(--sumi-border);
+    border-radius: 4px; padding: 18px; position: relative;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.15); scroll-margin-top: 20px;
   }
-  .module-section .badge {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 50%; background: var(--prussian-blue); color: var(--gold-light);
-    font-family: var(--font-jp); font-size: 13px; font-weight: 900; flex-shrink: 0;
+  .module-head {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.15); padding-bottom: 8px; margin-bottom: 14px;
+    font-family: var(--font-brush); font-weight: 700; font-size: 19px; color: var(--prussian-blue);
   }
-  .module-section p, .module-section li { font-size: 13.5px; line-height: 1.6; margin: 6px 0; }
-  .module-section ul, .module-section ol { margin: 6px 0; padding-left: 22px; }
-  .rule-block { background: rgba(255,255,255,0.4); border-left: 4px solid var(--vermilion); padding: 8px 12px; margin: 10px 0; border-radius: 2px; }
-  .rule-block b { color: var(--prussian-blue); }
-  .note { font-size: 12px; font-style: italic; color: #5a4f42; margin-top: 8px; }
+  .dep-tag { font-size: 10px; font-weight: 700; background: var(--gold); color: var(--ink-black); padding: 3px 8px; border-radius: 10px; letter-spacing: 0.5px; }
+  .dep-tag.none { background: #8aa9a1; }
 
-  .manual-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 10px 0; }
-  .manual-table th, .manual-table td { border: 1px solid var(--sumi-border); padding: 6px 8px; text-align: center; }
-  .manual-table th { background: var(--prussian-blue); color: var(--gold-light); }
-  .manual-table td { background: #fff; }
+  .module-body p { margin: 6px 0; font-size: 13.5px; line-height: 1.65; }
+  .module-body ul, .module-body ol { margin: 6px 0; padding-left: 22px; font-size: 13.5px; line-height: 1.6; }
+  .module-body li { margin-bottom: 4px; }
 
-  .mini-diagrams { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; margin: 14px 0; }
-  .mini-diagram-wrap { text-align: center; }
-  .mini-diagram-wrap .cap { font-size: 11.5px; font-weight: 700; color: var(--prussian-blue); margin-bottom: 6px; }
-  .mini-go { display: grid; grid-template-columns: repeat(3, 30px); gap: 4px; background: #d2b48c; padding: 7px; border-radius: 4px; }
-  .mini-go-cell { width: 30px; height: 30px; border-radius: 50%; background: rgba(0,0,0,0.08); display:flex; align-items:center; justify-content:center; font-size: 10px; color: #555; }
-  .mini-go-cell.b { background:#1a1a1a; }
-  .mini-go-cell.w { background:#f0f0f0; border:1px solid #999; }
-  .mini-maze { display: grid; grid-template-columns: repeat(4, 28px); gap: 2px; background: #222; padding: 5px; border-radius: 4px; }
-  .mini-maze-cell { width: 28px; height: 28px; background: var(--washi-bg); display:flex; align-items:center; justify-content:center; font-size: 12px; }
-  .mini-maze-cell.wall { background: var(--vermilion); }
+  .rule-box {
+    background: rgba(0,0,0,0.04); border-left: 3px solid var(--vermilion); border-radius: 2px;
+    padding: 10px 14px; margin: 10px 0; font-size: 13px;
+  }
+  .rule-box h4 { margin: 0 0 6px 0; font-size: 12px; color: var(--vermilion); letter-spacing: 0.5px; text-transform: uppercase; }
 
-  .footer-note {
-    text-align: center; font-size: 12px; color: #f3ece0; opacity: 0.75; margin-top: 24px; max-width: 700px;
+  table.manual-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12.5px; }
+  table.manual-table th, table.manual-table td { border: 1px solid var(--sumi-border); padding: 6px 8px; text-align: center; }
+  table.manual-table th { background: var(--prussian-blue); color: var(--gold-light); font-weight: 700; }
+  table.manual-table td.even-row { background: rgba(0,0,0,0.03); }
+
+  .diagrams-row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; margin: 14px 0; }
+  .diagram-block { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .diagram-title { font-size: 12px; font-weight: 700; color: var(--prussian-blue); }
+
+  .go-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; background: #d2b48c; padding: 7px; border-radius: 4px; width: 130px; }
+  .go-cell { aspect-ratio: 1; background: rgba(0,0,0,0.08); border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
+  .go-stone { width: 78%; height: 78%; border-radius: 50%; }
+  .go-stone.black { background: #1a1a1a; }
+  .go-stone.white { background: #f0f0f0; border: 1px solid #999; }
+
+  .maze-grid-static { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; background: #222; padding: 4px; border-radius: 4px; width: 150px; }
+  .maze-cell-static { aspect-ratio: 1; background: var(--washi-bg); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--prussian-blue); position: relative; }
+  .maze-cell-static.wall { background: #8a3a30; color: #fff; }
+  .maze-cell-static.start { background: var(--gold-light); }
+  .maze-cell-static.target { background: var(--green-ok); color: #fff; }
+
+  .kanji-order-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 10px 0; }
+  .kanji-order-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .kanji-order-char { width: 40px; height: 40px; display:flex; align-items:center; justify-content:center;
+    background: var(--washi-bg); border: 2px solid var(--prussian-blue); border-radius: 4px; font-family: var(--font-brush); font-size: 18px; color: var(--prussian-blue); }
+  .kanji-order-rank { font-size: 10px; font-weight: 700; color: var(--vermilion); }
+
+  .footer-note { text-align: center; font-size: 11px; color: rgba(0,0,0,0.5); margin-top: 10px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.1); }
+
+  @media (max-width: 600px) {
+    .header-bar { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -110,182 +142,303 @@
 <div class="wave-bg"></div>
 
 <div class="scroll-container">
-  <div class="doc-header">
-    <h1>📖 解体儀式 · PODRĘCZNIK SAPERA</h1>
-    <sub>PROTOKÓŁ UKIYO-E — DOKUMENT ODRĘBNY OD PANELU BOMBY</sub>
-    <p>Ten podręcznik zawiera wszystkie reguły potrzebne do rozbrojenia bomby proceduralnej. Osoba przy panelu (saper) opisuje na głos, co widzi na tablicy, a osoba czytająca ten dokument (instruktor) mówi, co należy zrobić.</p>
+  <div class="header-bar">
+    <div class="title-group">
+      <h1>解体儀式 · PODRĘCZNIK SAPERA</h1>
+      <sub>INSTRUKCJA ROZBRAJANIA — PROTOKÓŁ UKIYO-E</sub>
+    </div>
+    <div class="badge">9 MODUŁÓW · 3 BŁĘDY · 6:00 MIN</div>
+  </div>
+
+  <div class="intro-box">
+    Bomba generuje losowy <strong>numer seryjny (SN)</strong> oraz od 3 do 9 modułów do rozbrojenia jednocześnie.
+    Masz <strong>6 minut</strong> i maksymalnie <strong>3 błędy</strong> (błędne działanie w dowolnym module dolicza
+    jeden błąd — przy trzecim następuje detonacja). Część modułów jest w pełni losowa, a część
+    <strong>zależy od innych modułów lub od numeru seryjnego</strong> — dokładnie to opisuje ten podręcznik,
+    moduł po module, w kolejności, w jakiej trzeba je rozpracować.
+  </div>
+
+  <div class="rule-box">
+    <h4>Jak czytać numer seryjny (SN)</h4>
+    <p style="margin:4px 0 10px;">SN zawsze ma postać: <b>Litera – Litera – Cyfra – Litera – Cyfra</b>. Dwa elementy numeru
+    są kluczowe dla dalszych modułów: <b>ostatnia litera</b> (4. znak, tuż przed ostatnią cyfrą) oraz
+    <b>ostatnia cyfra</b> (5., ostatni znak).</p>
+    <div class="sn-diagram">
+      <div class="sn-cell"><div class="sn-char">A</div><div class="sn-tag">litera</div></div>
+      <div class="sn-cell"><div class="sn-char">B</div><div class="sn-tag">litera</div></div>
+      <div class="sn-cell"><div class="sn-char">3</div><div class="sn-tag">cyfra</div></div>
+      <div class="sn-cell"><div class="sn-char highlight-letter">C</div><div class="sn-tag">OSTATNIA LITERA</div></div>
+      <div class="sn-cell"><div class="sn-char highlight-digit">7</div><div class="sn-tag">OSTATNIA CYFRA</div></div>
+    </div>
+    <p style="margin:0;">Przykład powyżej: SN = <b>AB3C7</b> → ostatnia litera = <b>C</b>, ostatnia cyfra = <b>7</b>.</p>
   </div>
 
   <div class="toc">
-    <h2>Spis treści</h2>
-    <ol>
-      <li><a href="#zasady-ogolne">Zasady ogólne</a></li>
-      <li><a href="#modul-1">Moduł 1 — Przewody Jedwabne</a></li>
-      <li><a href="#modul-2">Moduł 2 — Pieczęć Duszy</a></li>
-      <li><a href="#modul-3">Moduł 3 — Glify Kanji</a></li>
-      <li><a href="#modul-4">Moduł 4 — Maski Kitsune</a></li>
-      <li><a href="#modul-5">Moduł 5 — Kamienie Go</a></li>
-      <li><a href="#modul-6">Moduł 6 — Zodiak Kanbatsu</a></li>
-      <li><a href="#modul-7">Moduł 7 — Dzwony Świątynne</a></li>
-      <li><a href="#modul-8">Moduł 8 — Hasło Samuraja</a></li>
-      <li><a href="#modul-9">Moduł 9 — Labirynt Torii</a></li>
-    </ol>
+    <a href="#m1">1. Przewody Jedwabne</a>
+    <a href="#m2">2. Pieczęć Duszy</a>
+    <a href="#m3">3. Glify Kanji</a>
+    <a href="#m4">4. Maski Kitsune</a>
+    <a href="#m5">5. Kamienie Go</a>
+    <a href="#m6">6. Zodiak Kanbatsu</a>
+    <a href="#m7">7. Dzwony Świątynne</a>
+    <a href="#m8">8. Hasło Samuraja</a>
+    <a href="#m9">9. Labirynt Torii</a>
   </div>
 
-  <div class="intro-box" id="zasady-ogolne">
-    <h2>⏱ Zasady ogólne</h2>
-    <ul>
-      <li>Bomba ma <b>5:00 minut</b> (300 sekund). Gdy czas spadnie do zera — eksplozja.</li>
-      <li>Dopuszczalne są maksymalnie <b>3 błędy</b> (widoczne jako pieczęcie 印 w nagłówku). Czwarty błąd = eksplozja.</li>
-      <li>Cel: rozbroić wszystkie <b>9 modułów</b> przed upływem czasu i bez przekroczenia limitu błędów.</li>
-      <li>Numer seryjny bomby (SN) widoczny w nagłówku ma znaczenie — jego <b>ostatnia cyfra</b> jest wykorzystywana w kilku regułach poniżej.</li>
-      <li>W Module 1 przecięcie złego przewodu daje jeden błąd, ale <b>nie blokuje modułu</b> — ten przewód zostaje wyłączony, a saper może spróbować przeciąć kolejny (w tym właściwy).</li>
-      <li>W panelu dostępne jest menu ⚙ Ustawienia z suwakiem głośności efektów dźwiękowych (tykanie zegara i narastająca muzyka napięcia).</li>
-      <li>Niektóre moduły zależą od danych z innych — kolejność w tym podręczniku odpowiada kolejności, w jakiej warto je odczytywać.</li>
-    </ul>
-  </div>
+  <div class="modules-list">
 
-  <div class="module-section" id="modul-1">
-    <h2><span class="badge">1</span> Przewody Jedwabne</h2>
-    <p>Saper podaje liczbę przewodów oraz ich kolory w kolejności od góry.</p>
-    <div class="rule-block"><b>Jeśli 3 przewody:</b> brak niebieskiego → przetnij #1. Jest niebieski i przewód #3 jest biały → przetnij #3. Jest niebieski, a przewód #3 nie jest biały → przetnij #2.</div>
-    <div class="rule-block"><b>Jeśli 4 przewody:</b> więcej niż 1 czerwony → przetnij ostatni czerwony (licząc od lewej). W innym wypadku: przewód #4 jest czarny → przetnij #1, w innym wypadku przetnij #2.</div>
-    <div class="rule-block"><b>Jeśli 5 lub 6 przewodów:</b> co najmniej 2 złote → przetnij #1. W innym wypadku: jest niebieski → przetnij pierwszy niebieski, brak niebieskiego → przetnij ostatni przewód.</div>
-    <p class="note">Pomyłka kosztuje jeden błąd, ale można próbować dalej — pozostałe nieprzecięte przewody wciąż są dostępne.</p>
-  </div>
-
-  <div class="module-section" id="modul-2">
-    <h2><span class="badge">2</span> Pieczęć Duszy</h2>
-    <p>Saper podaje kolor pieczęci oraz widoczny na niej znak.</p>
-    <div class="rule-block"><b>Reguła bazowa:</b> Czerwona pieczęć ze znakiem 命 (Życie) LUB Złota pieczęć ze znakiem 光 (Światło) → wymagany <b>1 klik</b>. Każda inna kombinacja koloru i znaku → wymagane <b>2 kliki</b> (podwójny klik).</div>
-    <div class="rule-block"><b>Modyfikator:</b> jeśli liczba przewodów w Module 1 jest PARZYSTA, wymagana liczba klików się odwraca (1↔2).</div>
-  </div>
-
-  <div class="module-section" id="modul-3">
-    <h2><span class="badge">3</span> Glify Kanji</h2>
-    <p>Saper podaje, które glify (spośród 12 możliwych) widnieją na tablicy. Każdy glif ma stałą rangę:</p>
-    <table class="manual-table">
-      <tr><th>龍</th><th>鳳</th><th>雷</th><th>風</th><th>火</th><th>水</th><th>山</th><th>澤</th><th>光</th><th>陰</th><th>竹</th><th>松</th></tr>
-      <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td></tr>
-    </table>
-    <div class="rule-block">Naciskaj widoczne glify w kolejności <b>rosnącej rangi</b> — chyba że Moduł 2 wymaga 2 klików, wtedy naciskaj w kolejności <b>malejącej</b> (odwróconej).</div>
-    <p class="note">Na tablicy pojawia się od 4 do 7 glifów.</p>
-  </div>
-
-  <div class="module-section" id="modul-4">
-    <h2><span class="badge">4</span> Maski Kitsune</h2>
-    <p>Saper podaje liczbę glifów kanji widocznych w Module 3 oraz kolejność wyświetlanych masek (4 maski, ponumerowane od 0 na ekranie).</p>
-    <div class="rule-block">Poprawna maska to ta o indeksie = <b>(liczba glifów kanji) mod 4</b>, licząc pozycje na ekranie od 0.</div>
-  </div>
-
-  <div class="module-section" id="modul-5">
-    <h2><span class="badge">5</span> Kamienie Go</h2>
-    <p>Saper podaje ostatnią cyfrę numeru seryjnego (SN).</p>
-    <div class="rule-block">Cyfra PARZYSTA → ułóż <b>Wzór X</b>. Cyfra NIEPARZYSTA → ułóż <b>Wzór T</b>. Kliknięcie w pole zmienia jego stan cyklicznie: puste → czarny kamień → biały kamień → puste.</div>
-    <div class="mini-diagrams">
-      <div class="mini-diagram-wrap">
-        <div class="cap">WZÓR X (cyfra parzysta)</div>
-        <div class="mini-go">
-          <div class="mini-go-cell b">1</div><div class="mini-go-cell">0</div><div class="mini-go-cell b">1</div>
-          <div class="mini-go-cell">0</div><div class="mini-go-cell w">2</div><div class="mini-go-cell">0</div>
-          <div class="mini-go-cell b">1</div><div class="mini-go-cell">0</div><div class="mini-go-cell b">1</div>
+    <!-- MODUŁ 1 -->
+    <div class="module-card" id="m1">
+      <div class="module-head"><span>1. Przewody Jedwabne</span><span class="dep-tag none">NIEZALEŻNY</span></div>
+      <div class="module-body">
+        <p>Widzisz od 3 do 6 kolorowych przewodów (Czerwony, Niebieski, Złoty, Biały, Czarny). Musisz przeciąć
+        <b>dokładnie jeden</b> — właściwy. Błędne cięcie to strike, ale nie blokuje modułu — próbuj dalej
+        pozostałymi przewodami.</p>
+        <div class="rule-box">
+          <h4>Jeśli są 3 przewody</h4>
+          <ul>
+            <li>Brak niebieskiego przewodu → przetnij przewód <b>#1</b>.</li>
+            <li>Jest niebieski, a przewód <b>#3</b> jest Biały → przetnij przewód <b>#3</b>.</li>
+            <li>Jest niebieski, przewód #3 inny kolor → przetnij przewód <b>#2</b>.</li>
+          </ul>
         </div>
-      </div>
-      <div class="mini-diagram-wrap">
-        <div class="cap">WZÓR T (cyfra nieparzysta)</div>
-        <div class="mini-go">
-          <div class="mini-go-cell w">2</div><div class="mini-go-cell w">2</div><div class="mini-go-cell w">2</div>
-          <div class="mini-go-cell">0</div><div class="mini-go-cell b">1</div><div class="mini-go-cell">0</div>
-          <div class="mini-go-cell">0</div><div class="mini-go-cell b">1</div><div class="mini-go-cell">0</div>
+        <div class="rule-box">
+          <h4>Jeśli są 4 przewody</h4>
+          <ul>
+            <li>Więcej niż 1 czerwony przewód → przetnij <b>ostatni</b> (najdalszy) czerwony przewód.</li>
+            <li>0 lub 1 czerwony, a przewód <b>#4</b> jest Czarny → przetnij przewód <b>#1</b>.</li>
+            <li>W pozostałych przypadkach → przetnij przewód <b>#2</b>.</li>
+          </ul>
+        </div>
+        <div class="rule-box">
+          <h4>Jeśli jest 5 lub 6 przewodów</h4>
+          <ul>
+            <li>2 lub więcej złotych przewodów → przetnij przewód <b>#1</b>.</li>
+            <li>Mniej niż 2 złote, ale jest niebieski → przetnij <b>pierwszy</b> niebieski przewód.</li>
+            <li>Brak 2 złotych i brak niebieskiego → przetnij <b>ostatni</b> przewód.</li>
+          </ul>
         </div>
       </div>
     </div>
-    <p class="note">Pola ponumerowane 1–9 (licząc rzędami od góry) — pola nr 1, 5 i 9 są ważne także dla Modułu 7.</p>
-  </div>
 
-  <div class="module-section" id="modul-6">
-    <h2><span class="badge">6</span> Zodiak Kanbatsu</h2>
-    <p>Saper podaje kolor pieczęci z Modułu 2 oraz liczbę przewodów z Modułu 1.</p>
-    <div class="rule-block">
-      Każdy kolor pieczęci ma stały numer: <b>Czerwony = 0, Niebieski = 1, Złoty = 2, Czarny = 3</b>.<br>
-      Dodaj do niego liczbę przewodów z Modułu 1, a wynik podziel modulo 5 (liczba zodiaków na liście).<br>
-      Rezultat wskazuje pozycję poprawnego zodiaku na liście rozwijanej, licząc od 0.
-    </div>
-    <p class="note">Przykład: Złota pieczęć (2) + 5 przewodów → (2+5) mod 5 = 2 → wybierz trzecią pozycję na liście (indeks 2).</p>
-  </div>
-
-  <div class="module-section" id="modul-7">
-    <h2><span class="badge">7</span> Dzwony Świątynne</h2>
-    <p>Weź WŁAŚCIWY wzór z Modułu 5 (X lub T, ustalony wg cyfry SN).</p>
-    <div class="rule-block">Odczytaj wartości pól nr <b>1, 5 i 9</b> (górny-lewy, środkowy, dolny-prawy). Każda wartość wskazuje dzwon: <b>0 → Dzwon 1, 1 → Dzwon 2, 2 → Dzwon 3</b>. Uderz dzwony w tej kolejności (pole 1, potem 5, potem 9).</div>
-    <table class="manual-table">
-      <tr><th>Wzór</th><th>Pole 1</th><th>Pole 5</th><th>Pole 9</th><th>Sekwencja dzwonów</th></tr>
-      <tr><td>X (cyfra parzysta)</td><td>1</td><td>2</td><td>1</td><td>Dzwon 2 → Dzwon 3 → Dzwon 2</td></tr>
-      <tr><td>T (cyfra nieparzysta)</td><td>2</td><td>1</td><td>0</td><td>Dzwon 3 → Dzwon 2 → Dzwon 1</td></tr>
-    </table>
-  </div>
-
-  <div class="module-section" id="modul-8">
-    <h2><span class="badge">8</span> Hasło Samuraja</h2>
-    <p>Saper podaje ostatnią cyfrę numeru seryjnego (SN).</p>
-    <div class="rule-block">Weź cyfrę mod 7 i odczytaj słowo z tabeli poniżej. Obracaj litery strzałkami, aż wyświetlacz pokaże dokładnie to słowo, następnie zatwierdź.</div>
-    <table class="manual-table">
-      <tr><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr>
-      <tr><td>SAKURA</td><td>KATANA</td><td>SHOGUN</td><td>GEISHA</td><td>KIMONO</td><td>BUSHIDO</td><td>NINJUTSU</td></tr>
-    </table>
-  </div>
-
-  <div class="module-section" id="modul-9">
-    <h2><span class="badge">9</span> Labirynt Torii</h2>
-    <p>Ściany są niewidoczne na tablicy sapera — musisz obliczyć ich układ z góry.</p>
-    <div class="rule-block">
-      Oblicz sumę trzech wartości sekwencji dzwonów z Modułu 7 (0/1/2 każda) — to <b>bellsSum</b>.<br>
-      Indeks układu = <b>(ostatnia cyfra SN + bellsSum) mod 4</b>. Poniżej wszystkie 4 możliwe układy ścian (czerwone pola = ściana, ⛩ = start, 🏁 = meta):
-    </div>
-    <div class="mini-diagrams">
-      <div class="mini-diagram-wrap">
-        <div class="cap">INDEKS 0</div>
-        <div class="mini-maze" id="m0"></div>
-      </div>
-      <div class="mini-diagram-wrap">
-        <div class="cap">INDEKS 1</div>
-        <div class="mini-maze" id="m1"></div>
-      </div>
-      <div class="mini-diagram-wrap">
-        <div class="cap">INDEKS 2</div>
-        <div class="mini-maze" id="m2"></div>
-      </div>
-      <div class="mini-diagram-wrap">
-        <div class="cap">INDEKS 3</div>
-        <div class="mini-maze" id="m3"></div>
+    <!-- MODUŁ 2 -->
+    <div class="module-card" id="m2">
+      <div class="module-head"><span>2. Pieczęć Duszy</span><span class="dep-tag">ZALEŻY OD MODUŁU 1</span></div>
+      <div class="module-body">
+        <p>Okrągły przycisk ma znak (命 Życie / 死 Śmierć / 火 Ogień / 光 Światło) oraz kolor tła.
+        Musisz kliknąć raz albo dwukrotnie — o tym decydują poniższe zasady, sprawdzane w tej kolejności.</p>
+        <div class="rule-box">
+          <h4>Krok 1 — zasada bazowa</h4>
+          <p style="margin:0;">Czerwona pieczęć ze znakiem <b>命 (Życie)</b> LUB Złota pieczęć ze znakiem <b>光 (Światło)</b>
+          → wymagany jest <b>1 klik</b>. Każda inna kombinacja koloru i znaku → wymagany jest <b>podwójny klik</b>.</p>
+        </div>
+        <div class="rule-box">
+          <h4>Krok 2 — korekta z Modułu 1</h4>
+          <p style="margin:0;">Jeśli liczba przewodów w Module 1 (Przewody Jedwabne) jest <b>parzysta</b> (4 lub 6) —
+          odwróć wynik z kroku 1 (1 klik zamienia się w 2, a 2 kliki w 1). Jeśli liczba przewodów jest
+          <b>nieparzysta</b> (3 lub 5) — zostaw wynik z kroku 1 bez zmian.</p>
+        </div>
       </div>
     </div>
-    <p class="note">Prowadź sapera krok po kroku (góra/dół/lewo/prawo) od pola startowego (0) do mety (15), omijając czerwone pola.</p>
+
+    <!-- MODUŁ 3 -->
+    <div class="module-card" id="m3">
+      <div class="module-head"><span>3. Glify Kanji</span><span class="dep-tag">ZALEŻY OD MODUŁU 2</span></div>
+      <div class="module-body">
+        <p>Widzisz od 4 do 7 glifów kanji ułożonych w siatce. Trzeba wcisnąć je we właściwej kolejności —
+        pomyłka resetuje postęp modułu i dolicza błąd. Każdy glif ma stałą, wyuczoną rangę:</p>
+        <div class="kanji-order-row">
+          <div class="kanji-order-item"><div class="kanji-order-char">龍</div><div class="kanji-order-rank">1</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">鳳</div><div class="kanji-order-rank">2</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">雷</div><div class="kanji-order-rank">3</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">風</div><div class="kanji-order-rank">4</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">火</div><div class="kanji-order-rank">5</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">水</div><div class="kanji-order-rank">6</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">山</div><div class="kanji-order-rank">7</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">澤</div><div class="kanji-order-rank">8</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">光</div><div class="kanji-order-rank">9</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">陰</div><div class="kanji-order-rank">10</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">竹</div><div class="kanji-order-rank">11</div></div>
+          <div class="kanji-order-item"><div class="kanji-order-char">松</div><div class="kanji-order-rank">12</div></div>
+        </div>
+        <div class="rule-box">
+          <h4>Kolejność wciskania</h4>
+          <p style="margin:0 0 6px;">Spośród widocznych glifów wciskaj je w kolejności <b>rosnącej rangi</b>
+          (od najniższego numeru do najwyższego) — <b>chyba że</b> Moduł 2 (Pieczęć Duszy) wymagał
+          <b>podwójnego kliknięcia</b>. W takim wypadku wciskaj je w kolejności <b>odwróconej</b>
+          (od najwyższej rangi do najniższej).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODUŁ 4 -->
+    <div class="module-card" id="m4">
+      <div class="module-head"><span>4. Maski Kitsune</span><span class="dep-tag">ZALEŻY OD MODUŁU 3</span></div>
+      <div class="module-body">
+        <p>Na siatce 2×2 widoczne są 4 maski. Poprawną maskę wskazuje wyłącznie jej <b>pozycja w siatce</b>,
+        nie jej wygląd (maski są losowe i tasowane za każdą grą).</p>
+        <div class="rule-box">
+          <h4>Jak wyliczyć pozycję</h4>
+          <p style="margin:0;">Policz, ile glifów było widocznych w Module 3 (Glify Kanji), i weź tę liczbę
+          <b>modulo 4</b>. Wynik wskazuje pozycję w siatce, licząc od <b>0</b>:</p>
+        </div>
+        <table class="manual-table">
+          <tr><th>Wynik (mod 4)</th><th>0</th><th>1</th><th>2</th><th>3</th></tr>
+          <tr><td>Pozycja w siatce 2×2</td><td>góra-lewo</td><td>góra-prawo</td><td>dół-lewo</td><td>dół-prawo</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODUŁ 5 -->
+    <div class="module-card" id="m5">
+      <div class="module-head"><span>5. Kamienie Go</span><span class="dep-tag">ZALEŻY OD SN (OSTATNIA CYFRA)</span></div>
+      <div class="module-body">
+        <p>Plansza 3×3 — klikanie pola zmienia jego stan cyklicznie: <b>puste → czarny kamień → biały kamień → puste</b>.
+        Trzeba ustawić dokładnie jeden z dwóch możliwych wzorów, w zależności od parzystości ostatniej cyfry SN.</p>
+        <div class="diagrams-row">
+          <div class="diagram-block">
+            <div class="diagram-title">Ostatnia cyfra SN PARZYSTA (0,2,4,6,8) → Wzór „X”</div>
+            <div class="go-board">
+              <div class="go-cell"><div class="go-stone black"></div></div>
+              <div class="go-cell"></div>
+              <div class="go-cell"><div class="go-stone black"></div></div>
+              <div class="go-cell"></div>
+              <div class="go-cell"><div class="go-stone white"></div></div>
+              <div class="go-cell"></div>
+              <div class="go-cell"><div class="go-stone black"></div></div>
+              <div class="go-cell"></div>
+              <div class="go-cell"><div class="go-stone black"></div></div>
+            </div>
+          </div>
+          <div class="diagram-block">
+            <div class="diagram-title">Ostatnia cyfra SN NIEPARZYSTA (1,3,5,7,9) → Wzór „T”</div>
+            <div class="go-board">
+              <div class="go-cell"><div class="go-stone white"></div></div>
+              <div class="go-cell"><div class="go-stone white"></div></div>
+              <div class="go-cell"><div class="go-stone white"></div></div>
+              <div class="go-cell"></div>
+              <div class="go-cell"><div class="go-stone black"></div></div>
+              <div class="go-cell"></div>
+              <div class="go-cell"></div>
+              <div class="go-cell"><div class="go-stone black"></div></div>
+              <div class="go-cell"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODUŁ 6 -->
+    <div class="module-card" id="m6">
+      <div class="module-head"><span>6. Zodiak Kanbatsu</span><span class="dep-tag">ZALEŻY OD MODUŁÓW 1 i 2</span></div>
+      <div class="module-body">
+        <p>Rozwijana lista pokazuje 5 losowo dobranych i potasowanych znaków zodiaku. Trzeba wybrać
+        z niej właściwą pozycję (licząc od góry, od <b>0</b>).</p>
+        <div class="rule-box">
+          <h4>Jak wyliczyć pozycję</h4>
+          <p style="margin:0 0 8px;">Każdy kolor pieczęci z Modułu 2 ma stały numer:</p>
+          <table class="manual-table">
+            <tr><th>Kolor pieczęci</th><th>Czerwony</th><th>Niebieski</th><th>Złoty</th><th>Czarny</th></tr>
+            <tr><td>Numer</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+          </table>
+          <p style="margin:8px 0 0;">Dodaj do tego numeru <b>liczbę przewodów z Modułu 1</b>, a wynik weź
+          <b>modulo 5</b> (liczba pozycji na liście). To jest pozycja do wybrania z listy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODUŁ 7 -->
+    <div class="module-card" id="m7">
+      <div class="module-head"><span>7. Dzwony Świątynne</span><span class="dep-tag">ZALEŻY WYŁĄCZNIE OD MODUŁU 5</span></div>
+      <div class="module-body">
+        <p>Trzy dzwony (Dzwon 1, Dzwon 2, Dzwon 3) trzeba uderzyć w konkretnej trzyelementowej kolejności.
+        Zła kolejność resetuje sekwencję i dolicza błąd.</p>
+        <div class="rule-box">
+          <h4>Zasada</h4>
+          <p style="margin:0 0 6px;">Sekwencja to zawartość pól nr <b>1, 5 i 9</b> wzoru z Modułu 5 (Kamienie Go):
+          puste pole → Dzwon 1, czarny kamień → Dzwon 2, biały kamień → Dzwon 3.</p>
+        </div>
+        <div class="rule-box">
+          <h4>Gotowa odpowiedź (na podstawie ostatniej cyfry SN)</h4>
+          <table class="manual-table">
+            <tr><th>Ostatnia cyfra SN</th><th>Sekwencja do uderzenia</th></tr>
+            <tr><td>Parzysta (wzór „X”)</td><td><b>Dzwon 2 → Dzwon 3 → Dzwon 2</b></td></tr>
+            <tr><td>Nieparzysta (wzór „T”)</td><td><b>Dzwon 3 → Dzwon 2 → Dzwon 1</b></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODUŁ 8 -->
+    <div class="module-card" id="m8">
+      <div class="module-head"><span>8. Hasło Samuraja</span><span class="dep-tag">ZALEŻY OD SN (OSTATNIA LITERA)</span></div>
+      <div class="module-body">
+        <p>Dla każdej litery hasła masz strzałki ▲/▼, które zmieniają literę cyklicznie A→Z. Ustaw wszystkie
+        litery tak, by powstało właściwe słowo, i zatwierdź przyciskiem „ZATWIERDŹ HASŁO”.
+        Moduł ten <b>nie zależy od Modułu 7</b> ani żadnego innego modułu — tylko od SN.</p>
+        <div class="rule-box">
+          <h4>Jak wyliczyć słowo</h4>
+          <p style="margin:0;">Weź <b>ostatnią literę SN</b> (4. znak numeru, tuż przed ostatnią cyfrą), zamień ją
+          na pozycję w alfabecie (A=0, B=1 … Z=25) i policz wynik <b>modulo 7</b>. Poniższa tabela od razu
+          podaje słowo dla każdej litery:</p>
+        </div>
+        <table class="manual-table">
+          <tr><th>Ostatnia litera SN</th><th>Hasło</th></tr>
+          <tr><td>A, H, O, V</td><td><b>SAKURA</b></td></tr>
+          <tr><td>B, I, P, W</td><td><b>KATANA</b></td></tr>
+          <tr><td>C, J, Q, X</td><td><b>SHOGUN</b></td></tr>
+          <tr><td>D, K, R, Y</td><td><b>GEISHA</b></td></tr>
+          <tr><td>E, L, S, Z</td><td><b>KIMONO</b></td></tr>
+          <tr><td>F, M, T</td><td><b>BUSHIDO</b></td></tr>
+          <tr><td>G, N, U</td><td><b>NINJUTSU</b></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- MODUŁ 9 -->
+    <div class="module-card" id="m9">
+      <div class="module-head"><span>9. Labirynt Torii</span><span class="dep-tag">ZALEŻY OD SN i MODUŁU 7</span></div>
+      <div class="module-body">
+        <p>Plansza 4×4. Zaczynasz w polu ⛩ (pole 1, góra-lewo) i musisz dojść do mety 🏁 (pole 16, dół-prawo)
+        strzałkami. Ściany są <b>niewidoczne</b> — wejście na pole ze ścianą kosztuje błąd, ale nie cofa pozycji.</p>
+        <div class="rule-box">
+          <h4>Który układ ścian obowiązuje</h4>
+          <p style="margin:0;">Zależy od ostatniej cyfry SN modulo 4:</p>
+        </div>
+        <table class="manual-table">
+          <tr><th>Ostatnia cyfra SN mod 4</th><th>0 lub 1</th><th>2 lub 3</th></tr>
+          <tr><td>Cyfry, których to dotyczy</td><td>0, 1, 4, 5, 8, 9</td><td>2, 3, 6, 7</td></tr>
+          <tr><td>Ściany na polach (licząc 1–16)</td><td><b>2, 6, 10</b></td><td><b>3, 7, 9, 13</b></td></tr>
+        </table>
+        <div class="diagrams-row">
+          <div class="diagram-block">
+            <div class="diagram-title">Ściany na polach 2, 6, 10</div>
+            <div class="maze-grid-static">
+              <div class="maze-cell-static start">1</div><div class="maze-cell-static wall">2</div><div class="maze-cell-static">3</div><div class="maze-cell-static">4</div>
+              <div class="maze-cell-static">5</div><div class="maze-cell-static wall">6</div><div class="maze-cell-static">7</div><div class="maze-cell-static">8</div>
+              <div class="maze-cell-static">9</div><div class="maze-cell-static wall">10</div><div class="maze-cell-static">11</div><div class="maze-cell-static">12</div>
+              <div class="maze-cell-static">13</div><div class="maze-cell-static">14</div><div class="maze-cell-static">15</div><div class="maze-cell-static target">16</div>
+            </div>
+          </div>
+          <div class="diagram-block">
+            <div class="diagram-title">Ściany na polach 3, 7, 9, 13</div>
+            <div class="maze-grid-static">
+              <div class="maze-cell-static start">1</div><div class="maze-cell-static">2</div><div class="maze-cell-static wall">3</div><div class="maze-cell-static">4</div>
+              <div class="maze-cell-static">5</div><div class="maze-cell-static">6</div><div class="maze-cell-static wall">7</div><div class="maze-cell-static">8</div>
+              <div class="maze-cell-static wall">9</div><div class="maze-cell-static">10</div><div class="maze-cell-static">11</div><div class="maze-cell-static">12</div>
+              <div class="maze-cell-static wall">13</div><div class="maze-cell-static">14</div><div class="maze-cell-static">15</div><div class="maze-cell-static target">16</div>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:10px;">Przykładowa bezpieczna trasa dla lewego układu: pola 1→5→9→13→14→15→16.
+        Dla prawego układu: pola 1→2→6→10→14→15→16.</p>
+      </div>
+    </div>
+
   </div>
 
-  <div class="footer-note">
-    Wszystkie reguły w tym dokumencie są w pełni obliczalne na podstawie danych widocznych na panelu bomby — żadna z nich nie wymaga zgadywania.
-  </div>
+  <div class="footer-note">PROTOKÓŁ UKIYO-E · Podręcznik sapera — trzymaj obok bomby, nie w niej.</div>
 </div>
 
-<script>
-  // Statyczne diagramy labiryntów (te same 4 układy, co w panelu bomby)
-  const MAZE_PRESETS = [
-    [1, 5, 9],       // Indeks 0 — linia pionowa (z przejściem)
-    [4, 5, 6],       // Indeks 1 — linia pozioma
-    [2, 6, 8, 12],   // Indeks 2 — zygzak
-    [1, 6, 11]       // Indeks 3 — przekątna
-  ];
-  MAZE_PRESETS.forEach((walls, idx) => {
-    const el = document.getElementById('m' + idx);
-    for(let i = 0; i < 16; i++) {
-      const cell = document.createElement('div');
-      cell.className = 'mini-maze-cell' + (walls.includes(i) ? ' wall' : '');
-      if(i === 0) cell.textContent = '⛩';
-      else if(i === 15) cell.textContent = '🏁';
-      el.appendChild(cell);
-    }
-  });
-</script>
 </body>
 </html>
